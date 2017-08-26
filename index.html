@@ -1,0 +1,44 @@
+﻿<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Школа Node.JS</title>
+		<meta charset="utf-8" />
+		<script src="index.js" charset="UTF-8" type="application/javascript"></script>
+		<style type="text/css">
+			.normal {
+				border: 1px solid #58ACFA;
+			}
+			.error {
+				border: 1px solid red;
+				background-color: #F2FBEF;
+			}
+			input{
+				margin-top: 5px;
+				margin-bottom: 5px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="main">
+			<h2>Форма</h2>
+			<form id="myForm" action="http://www.yandex.ru" method="post">
+				<div>
+					<label for="name">ФИО</label>
+					<input type="text" name="name" id="fio" wrequired="required" class="normal"/>
+				</div>
+				<div class="field half">
+					<label for="email">Электронная почта</label>
+					<input type="text" name="email" id="email" wrequired="required" class="normal"/>
+				</div>
+				<div>
+					<label for="phone">Телефон</label>
+					<input type="text" name="phone" id="phone" wrequired="required" class="normal"/>
+				</div>
+				<div style="margin-top: 10px;">
+					<input type="button" onClick="checkObj()" value="Отправить сообщение" id="submitButton"/>
+				</div>
+			</form>
+		</div>
+		<div id="resultContainer" style="margin-top: 25px;">&nbsp;</div>
+	</body>
+</html>
