@@ -4,6 +4,7 @@
 		<title>Школа Node.JS</title>
 		<meta charset="utf-8" />
 		<script src="index.js" charset="UTF-8" type="application/javascript"></script>
+		<script src="jquery.min.js" charset="UTF-8" type="application/javascript"></script>
 		<style type="text/css">
 			.normal {
 				border: 1px solid #58ACFA;
@@ -11,6 +12,14 @@
 			.error {
 				border: 1px solid red;
 				background-color: #F2FBEF;
+			}
+			.success {
+				border: 1px solid #A9F5A9;
+				background-color: #E0F8E0;
+			}
+			.progress {
+				border: 1px solid #F2F5A9;
+				background-color: #F5F6CE;
 			}
 			input{
 				margin-top: 5px;
@@ -21,24 +30,36 @@
 	<body>
 		<div id="main">
 			<h2>Форма</h2>
-			<form id="myForm" action="http://www.yandex.ru" method="post">
+			<form id="myForm" action="success.json" method="get">
 				<div>
 					<label for="name">ФИО</label>
-					<input type="text" name="name" id="fio" wrequired="required" class="normal"/>
+					<input type="text" name="name" id="fio" class="normal"/>
 				</div>
 				<div class="field half">
 					<label for="email">Электронная почта</label>
-					<input type="text" name="email" id="email" wrequired="required" class="normal"/>
+					<input type="text" name="email" id="email" class="normal"/>
 				</div>
 				<div>
 					<label for="phone">Телефон</label>
-					<input type="text" name="phone" id="phone" wrequired="required" class="normal"/>
+					<input type="text" name="phone" id="phone" class="normal"/>
 				</div>
 				<div style="margin-top: 10px;">
-					<input type="button" onClick="checkObj()" value="Отправить сообщение" id="submitButton"/>
+					<input type="button" onClick="MyForm.submit()" value="Отправить сообщение" id="submitButton"/>
 				</div>
 			</form>
 		</div>
 		<div id="resultContainer" style="margin-top: 25px;">&nbsp;</div>
+		<div style="margin-top: 25px;">
+			<form>
+				<div>
+					<label>Выберите направляемый запрос (к шаблонам)</label><br/>
+					<select id="response" onChange="document.forms.myForm.action = this.value;">
+						<option value="success.json">success.json</option>
+						<option value="error.json">error.json</option>
+						<option value="progress.json">progress.json</option>
+					</select>
+				</div>
+			</form>
+		</div>
 	</body>
 </html>

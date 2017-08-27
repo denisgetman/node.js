@@ -1,28 +1,12 @@
-var response = {
-	"success": '{"status":"success"}',
-	"error": '{"status":"error","reason":"*string*"}',
-	"process": '{"status":"progress","timeout":"*number"}'
-};
-
 var MyForm = {};
 
 MyForm.validate = function() {
-    // errors from templates
-	var resError = response.error;
-	var resSuccess = response.success;
-	var resProgress = response.progress;
-	
 	var result = validationErrors();
 	if(result.length >0){
-		resError = resError.replace('*string*',result.toString())
-		document.getElementById('resultContainer').textContent = resError;
-		document.getElementById('resultContainer').className = 'error';
 		return {isValid: false, errorFields: result};
 	}
 	else{
 		document.getElementById('submitButton').disabled = true;
-		document.getElementById('resultContainer').textContent = resSuccess;
-		document.getElementById('resultContainer').className = 'normal';
 		return {isValid: true, errorFields: result};
 	}
 }
@@ -106,18 +90,38 @@ function sumDigits(phone) {
 }
 
 function submit(){
+	var resultContainer = document.getElementById('resultContainer');
 	result = MyForm.validate();
+	function ajaxRequest(){
+		var url = document.forms.myForm.action;
+		$.ajax({
+			url: url,
+			success: function(data){
+				switch (data.status) {
+					case 'success':
+						resultContainer.className = "success";
+						resultContainer.textContent = "Success";
+						break;
+					case 'error':
+						resultContainer.className = "error";
+						resultContainer.textContent = data.reason;
+						break;
+					case 'progress':
+						resultContainer.className = "progress";
+						setTimeout(function(){
+							ajaxRequest();
+						}, data.timeout);
+						break;
+					default:
+						break;
+				}
+			}
+		});
+	}
 	if(result.isValid){
-		console.log('+');
+		ajaxRequest();
 	}
-	else{
-		console.log('-');
-	}
-}
-
-function checkObj(){
-	obj = {name: "Dd", email: "dd", phone: "dd"};
-	console.log(MyForm.getData());
-	console.log(MyForm.validate());
-	//MyForm.setData(obj);
+	//else{
+	//	resultContainer.className = "error";
+	//}
 }
