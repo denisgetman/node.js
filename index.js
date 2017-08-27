@@ -6,7 +6,6 @@ MyForm.validate = function() {
 		return {isValid: false, errorFields: result};
 	}
 	else{
-		document.getElementById('submitButton').disabled = true;
 		return {isValid: true, errorFields: result};
 	}
 }
@@ -32,7 +31,7 @@ function validationErrors(){
 	// checking name
 	pattern = /^[\u0400-\u04FFa-zA-Z]+\s+[\u0400-\u04FFa-zA-Z]+\s+[\u0400-\u04FFa-zA-Z]+/;
 	if(!pattern.test(name.value)){
-		errors.push('wrong name');
+		errors.push('name');
 		name.className = "error";
 	}
 	else{
@@ -42,7 +41,7 @@ function validationErrors(){
 	// checking email
 	pattern = /^([a-z0-9_])+[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@(ya.ru|yandex.ru|yandex.ua|yandex.by|yandex.kz|yandex.com)/;
 	if(!pattern.test(email.value)){
-		errors.push('wrong email');
+		errors.push('email');
 		email.className = "error";
 	}
 	else{
@@ -55,7 +54,7 @@ function validationErrors(){
 		phone.className = "normal";
 	}
 	else{
-		errors.push('wrong phone');
+		errors.push('phone');
 		phone.className = "error";
 	}
 	return errors;
@@ -119,9 +118,7 @@ function submit(){
 		});
 	}
 	if(result.isValid){
+		document.getElementById('submitButton').disabled = true;
 		ajaxRequest();
 	}
-	//else{
-	//	resultContainer.className = "error";
-	//}
 }
