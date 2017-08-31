@@ -73,14 +73,14 @@ function getData(){
 }
 
 function setData(obj){
-	document.getElementById('fio').value = obj.name;
+	document.getElementById('fio').value = obj.fio;
 	document.getElementById('email').value = obj.email;
 	document.getElementById('phone').value = obj.phone;
 }
 
 function sumDigits(phone) {
 	var total = 0;
-	phone = phone.replace(/\D/g,'');
+	var phone = phone.replace(/\D/g,'');
 	var digits = phone.split("")
 	digits.forEach(function(item, i, arr){
 		total += parseInt(item);
@@ -90,7 +90,7 @@ function sumDigits(phone) {
 
 function submit(){
 	var resultContainer = document.getElementById('resultContainer');
-	result = MyForm.validate();
+	var result = MyForm.validate();
 	function ajaxRequest(){
 		var url = document.forms.myForm.action;
 		$.ajax({
